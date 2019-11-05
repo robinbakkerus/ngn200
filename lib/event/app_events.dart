@@ -20,8 +20,9 @@ class ShowPictureEvent {
   ShowPictureEvent(this.imagePath);
 }
 
-class SaveVolonteerEvent {
-}
+class SaveVolonteerEvent {}
+
+class AddVolonteerEvent {}
 
 //--- AppEvents
 class AppEvents {
@@ -36,9 +37,12 @@ class AppEvents {
   static void fireSwitchStack(int index) =>
       _sEventBus.fire(new SwitchStackEvent(index));
   static void fireTakePicture() => _sEventBus.fire(new TakePictureEvent());
-  static void fireShowPicture(String imagePath) => _sEventBus.fire(new ShowPictureEvent(imagePath));
-  static void fireCompressPicture(String imagePath) => _sEventBus.fire(new CompressPictureEvent(imagePath));
+  static void fireShowPicture(String imagePath) =>
+      _sEventBus.fire(new ShowPictureEvent(imagePath));
+  static void fireCompressPicture(String imagePath) =>
+      _sEventBus.fire(new CompressPictureEvent(imagePath));
   static void fireSaveVolonteer() => _sEventBus.fire(new SaveVolonteerEvent());
+  static void fireAddVolonteer() => _sEventBus.fire(new AddVolonteerEvent());
 
   //--
   static void onSwitchTask(OnSwichTaskFunc func) =>
@@ -55,6 +59,9 @@ class AppEvents {
 
   static void onSaveVolonteer(OnSaveVolonteerFunc func) =>
       _sEventBus.on<SaveVolonteerEvent>().listen((event) => func(event));
+
+  static void onAddVolonteer(OnAddVolonteerFunc func) =>
+      _sEventBus.on<AddVolonteerEvent>().listen((event) => func(event));
 }
 
 typedef void OnSwichTaskFunc(SwitchStackEvent event);
@@ -62,3 +69,4 @@ typedef void OnTakePictureFunc(TakePictureEvent event);
 typedef void OnShowPictureFunc(ShowPictureEvent event);
 typedef void OnCompressPictureFunc(CompressPictureEvent event);
 typedef void OnSaveVolonteerFunc(SaveVolonteerEvent event);
+typedef void OnAddVolonteerFunc(AddVolonteerEvent event);

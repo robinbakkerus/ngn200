@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ngn200_vrijwillgers/controller/app_controller.dart';
-import 'package:ngn200_vrijwillgers/util/widget_utils.dart';
 import 'package:ngn200_vrijwillgers/event/app_events.dart';
-import 'package:ngn200_vrijwillgers/data/app_data.dart';
+import 'package:ngn200_vrijwillgers/util/widget_utils.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -40,6 +39,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onClick() {
-    AppEvents.fireSwitchStack(STACK_ADD);
+    AppEvents.fireAddVolonteer();
   }
 }

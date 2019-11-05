@@ -1,4 +1,5 @@
 import 'package:ngn200_vrijwillgers/event/app_events.dart';
+import 'package:ngn200_vrijwillgers/model/volonteer.dart';
 import 'package:ngn200_vrijwillgers/util/image_utils.dart';
 import 'package:ngn200_vrijwillgers/data/app_data.dart';
 import 'package:ngn200_vrijwillgers/service/firestore_service.dart';
@@ -14,7 +15,7 @@ class AppController {
     AppEvents.onTakePicture(_onTakePicture);
     AppEvents.onCompressPicture(_onCompressPicture);
     AppEvents.onSaveVolonteer(_onSaveVolonteer);
-    // AppEvents.onTakePicture(_onTakePicture)
+    AppEvents.onAddVolonteer(_onAddVolonteer);
   }
 
   void _onTakePicture(TakePictureEvent event) {
@@ -36,5 +37,8 @@ class AppController {
     AppEvents.fireSwitchStack(STACK_HOME.hashCode);
   }
 
-
+  void _onAddVolonteer(AddVolonteerEvent event) {
+    AppData.currentVolonteer = Volonteer();
+    AppEvents.fireSwitchStack(STACK_ADD);
+  }
 }

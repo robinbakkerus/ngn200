@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tags/input_tags.dart';
-import 'package:ngn200_vrijwillgers/data/app_data.dart';
+import 'package:ngn200_vrijwillgers/data/suggestions.dart';
+import 'package:ngn200_vrijwillgers/util/flutter_typeahead.dart';
 
 class WhereInputField extends StatelessWidget {
   const WhereInputField({Key key}) : super(key: key);
@@ -19,101 +19,93 @@ class _WhereInputField extends StatefulWidget {
   @override
   __WhereInputFieldState createState() => __WhereInputFieldState();
 }
+
 //-----------------------------------------------------------------------------
 class __WhereInputFieldState extends State<_WhereInputField> {
-  TextEditingController _controller = TextEditingController();
-  List<String> _whatTags = [];
-  String _newText = "";
-  // String _oldText = "";
+// final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _typeAheadController = TextEditingController();
+
+  String selectedText;
 
   @override
   void initState() {
     super.initState();
-
-    _controller.addListener(_handleText);
-    _whatTags.addAll([
-      'Bestuur',
-      'Trainer/coach',
-      // 'Algemeen',
-      // 'Mantelzorg',
-      // 'Ondersteuning'
-    ]);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: _whereField(),
-    );
+    return GestureDetector(
+        onTap: this._onTapped,
+        child: new Container(
+            width: 500.0,
+            padding: new EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 40.0),
+            color: Colors.yellowAccent,
+            child: Container(
+              child: Text("$selectedText"),
+              height: 50,
+            )));
   }
 
-  TextFormField _whereField() {
-    return TextFormField(
-      controller: _controller,
-      decoration: new InputDecoration(
-        labelText: "Waar (vereniging, mantelzorg, organisatie enz)",
-        fillColor: Colors.white,
-        border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(5.0),
-          borderSide: new BorderSide(),
-        ),
-        //fillColor: Colors.green
-      ),
-      validator: (value) {
-        if (value.isEmpty) {
-          return 'Geef de (voor)naam';
-        }
-        return null;
-      },
-      onSaved: (val) => setState(() => AppData.currentVolonteer.wie = val),
-    );
-  }
-
-  _handleText() {
-    print("${_controller.text}");
-    if (this._controller.text != this._newText) {
-      _showTags();
-    }
-  }
-
-  _showTags() {
+  void _onTapped() {
+    print('Tap ...');
+    this._typeAheadController.text = "";
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text('Kies Wat ...'),
-            content: _whatTagsWidget(),
-            actions: <Widget>[
-              FlatButton(
-                  onPressed: () {
-                    _dismissDialog();
-                  },
-                  child: Text('Close')),
-            ],
+          return Scaffold(
+            body: Column(
+              children: <Widget>[
+                _typeAhead(),
+                Container(
+                  child: FlatButton(
+                      onPressed: () {
+                        this._save();
+                        _dismissDialog(context);
+                      },
+                      child: Text('Selecteer')),
+                ),
+              ],
+            ),
           );
         });
   }
 
-  Widget _whatTagsWidget() {
-    return InputTags(
-      tags: _whatTags,
-      onDelete: (tag) {
-        print(tag);
+  void _save() {
+    setState(() {
+      this.selectedText = _typeAheadController.text;
+    });
+  }
+  Widget _typeAhead() {
+    return TypeAheadFormField(
+      textFieldConfiguration: TextFieldConfiguration(
+          controller: this._typeAheadController,
+          decoration: InputDecoration(labelText: 'City')),
+      suggestionsCallback: (pattern) {
+        return CitiesService.getSuggestions(pattern);
       },
-      onInsert: (tag) {
-        print(tag);
-        setState(() {
-          // this._oldText = this._newText;
-          this._newText = tag; 
-        });
-        _dismissDialog();
+      itemBuilder: (context, suggestion) {
+        return ListTile(
+          title: Text(suggestion),
+        );
       },
+      transitionBuilder: (context, suggestionsBox, controller) {
+        return suggestionsBox;
+      },
+      onSuggestionSelected: (suggestion) {
+        this._typeAheadController.text = suggestion;
+      },
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please select a city';
+        } else {
+          return "";
+        }
+      },
+      onSaved: (value) => print(value),
     );
   }
 
-  _dismissDialog() {
+  _dismissDialog(context) {
     Navigator.of(context).pop();
   }
-
-  
 }

@@ -44,11 +44,15 @@ class _AddVrijwilligerPageState extends State<_AddVrijwilligerPage> {
         scrollDirection: Axis.vertical,
         children: <Widget>[
           WidgetUtils.verSpace(5),
-          _whoField(),
+          _inputField("Wie ", this._saveWie),
           WidgetUtils.verSpace(5),
-          _whereField(),
+          _inputField("Waar ", this._saveWaar),
           WidgetUtils.verSpace(5),
-          _whatField(),
+          _inputField("Wat ", this._saveWat),
+          WidgetUtils.verSpace(5),
+          _inputField("Postcode ", this._savePostcode),
+          WidgetUtils.verSpace(5),
+          _inputField("Geboorte jaar ", this._saveDob, numField:true),
           WidgetUtils.verSpace(5),
           _submitButton(),
           // _snackbar(context),
@@ -57,10 +61,12 @@ class _AddVrijwilligerPageState extends State<_AddVrijwilligerPage> {
     );
   }
 
-  TextFormField _whoField() {
+  
+  Widget _inputField(String msg, Function func, {bool numField=false}) {
     return TextFormField(
+      keyboardType: numField ? TextInputType.number : TextInputType.text,
       decoration: new InputDecoration(
-        labelText: "Wie (naam )",
+        labelText: msg,
         fillColor: Colors.white,
         border: new OutlineInputBorder(
           borderRadius: new BorderRadius.circular(5.0),
@@ -68,59 +74,27 @@ class _AddVrijwilligerPageState extends State<_AddVrijwilligerPage> {
         ),
         //fillColor: Colors.green
       ),
-      // validator: (value) {
-      //   if (value.isEmpty) {
-      //     return 'Geef de (voor)naam';
-      //   }
-      //   return null;
-      // },
-      onSaved: (val) => setState(() => AppData.currentVolonteer.wie = val),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Geef de (voor)naam';
+        }
+        return null;
+      },
+      onSaved: (val) => setState(() => func(val)),
     );
   }
 
-  Widget _whereField() {
-    // return WhereInputField();
-    return TextFormField(
-      decoration: new InputDecoration(
-        labelText: "Waar (vereniging, organisatie etc )",
-        fillColor: Colors.white,
-        border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(5.0),
-          borderSide: new BorderSide(),
-        ),
-        //fillColor: Colors.green
-      ),
-      // validator: (value) {
-      //   if (value.isEmpty) {
-      //     return 'Geef de (voor)naam';
-      //   }
-      //   return null;
-      // },
-      onSaved: (val) => setState(() => AppData.currentVolonteer.waar = val),
-    );
-  }
 
-  Widget _whatField() {
-    // return WhereInputField();
-    return TextFormField(
-      decoration: new InputDecoration(
-        labelText: "Wat (coach, bestuur, mantelzorg ... )",
-        fillColor: Colors.white,
-        border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(5.0),
-          borderSide: new BorderSide(),
-        ),
-        //fillColor: Colors.green
-      ),
-      // validator: (value) {
-      //   if (value.isEmpty) {
-      //     return 'Geef de (voor)naam';
-      //   }
-      //   return null;
-      // },
-      onSaved: (val) => setState(() => AppData.currentVolonteer.wat = val),
-    );
-  }
+
+  void _saveWie(val) => AppData.currentVolonteer.wie = val; 
+  void _saveWat(val) => AppData.currentVolonteer.wat = val; 
+  void _saveWaar(val) => AppData.currentVolonteer.waar = val; 
+  void _savePostcode(val) => AppData.currentVolonteer.postCode = val; 
+  void _saveDob(val) {
+    if (val != null && val != "") {
+      AppData.currentVolonteer.dob = int.parse(val);
+    }
+  }  
 
   Widget _submitButton() {
     return RaisedButton(
