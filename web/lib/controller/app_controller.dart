@@ -2,7 +2,7 @@ import 'package:ngn200/event/app_events.dart';
 import 'package:ngn200/model/volonteer.dart';
 import 'package:ngn200/util/image_utils.dart';
 import 'package:ngn200/data/app_data.dart';
-import 'package:ngn200/service/firestore_service.dart';
+// import 'package:ngn200/service/firestore_service.dart';
 
 class AppController {
   static final AppController _singleton = new AppController._internal();
@@ -19,7 +19,7 @@ class AppController {
   }
 
   void _onTakePicture(TakePictureEvent event) {
-    AppEvents.fireSwitchStack(STACK_TAKE_PICTURE);
+    AppEvents.fireSwitchStack(STACK_SHOW_VOLONTEERS);
   }
 
   void _onCompressPicture(CompressPictureEvent event) {
@@ -32,7 +32,7 @@ class AppController {
     void _onSaveVolonteer(SaveVolonteerEvent event) {
     AppData.currentVolonteer.lastupdated = DateTime.now();
     AppData.currentVolonteer.aanmelder = ""; //todo
-    FirestoreService()..saveVolunteer(AppData.currentVolonteer);
+    // FirestoreService()..saveVolunteer(AppData.currentVolonteer);
     //Todo geef okay msg
     AppEvents.fireSwitchStack(STACK_HOME.hashCode);
   }

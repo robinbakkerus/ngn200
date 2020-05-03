@@ -232,7 +232,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:ngn200_vrijwillgers/util/flutter_keyboard_visibility.dart';
+import 'package:ngn200/util/flutter_keyboard_visibility.dart';
 
 typedef FutureOr<List<T>> SuggestionsCallback<T>(String pattern);
 typedef Widget ItemBuilder<T>(BuildContext context, T itemData);

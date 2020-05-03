@@ -16,9 +16,12 @@ static final FirestoreService _singleton = new FirestoreService._internal();
     DocumentReference ref = await databaseReference
         .collection("vrijwilligers")
         .add(volonteer.toJson());
-    print(ref.documentID);
     return ref.documentID;
   }
 
+  Future<QuerySnapshot> getAllVolonteers() {
+    final databaseReference = Firestore.instance;
+     return databaseReference.collection('vrijwilligers').getDocuments();
+  }
 
 }

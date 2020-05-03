@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
-import 'package:ngn200_vrijwillgers/event/app_events.dart';
+import 'package:ngn200/event/app_events.dart';
 
 class TakePictureScreen extends StatelessWidget {
   TakePictureScreen({Key key}) : super(key: key);

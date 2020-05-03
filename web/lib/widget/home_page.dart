@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Image(
-            image: AssetImage('lib/assets/Nuenen_gerwen_nederwetten_006.jpg')),
+            image: AssetImage('Nuenen_gerwen_nederwetten_006.jpg')),
         WidgetUtils.verSpace(5),
         Text('Todo hier uitleg over deze app om vrijwilligers aan te melden etc...'),
         WidgetUtils.verSpace(5),

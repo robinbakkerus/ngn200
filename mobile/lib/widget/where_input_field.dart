@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ngn200_vrijwillgers/data/suggestions.dart';
-import 'package:ngn200_vrijwillgers/util/flutter_typeahead.dart';
+import 'package:ngn200/data/suggestions.dart';
+import 'package:ngn200/util/flutter_typeahead.dart';
 
 class WhereInputField extends StatelessWidget {
   const WhereInputField({Key key}) : super(key: key);

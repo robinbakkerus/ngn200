@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ngn200_vrijwillgers/event/app_events.dart';
-import 'package:ngn200_vrijwillgers/data/app_data.dart';
+import 'package:ngn200/event/app_events.dart';
+import 'package:ngn200/data/app_data.dart';
 
 class Choice {
   const Choice({this.title, this.icon, this.stackIndex});

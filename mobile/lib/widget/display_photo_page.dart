@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:ngn200_vrijwillgers/event/app_events.dart';
-import 'package:ngn200_vrijwillgers/util/widget_utils.dart';
+import 'package:ngn200/event/app_events.dart';
+import 'package:ngn200/util/widget_utils.dart';
 
 class DisplayPhotoPage extends StatefulWidget {
   DisplayPhotoPage({Key key}) : super(key: key);

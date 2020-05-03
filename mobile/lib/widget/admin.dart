@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngn200_vrijwillgers/widget/where_input_field.dart';
+import 'package:ngn200/widget/where_input_field.dart';
 
 class AdminPage extends StatelessWidget {
   const AdminPage({Key key}) : super(key: key);

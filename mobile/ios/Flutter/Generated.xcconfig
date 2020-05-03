@@ -1,9 +1,10 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=c:\my-dev\ide\flutter
-FLUTTER_APPLICATION_PATH=C:\projects\flutter\ngn200-vrijwilligers\ngn200_vrijwillgers
-FLUTTER_TARGET=lib\main.dart
+FLUTTER_ROOT=/home/robin/my-dev/flutter
+FLUTTER_APPLICATION_PATH=/home/robin/my-projects/ngn200/mobile
+FLUTTER_TARGET=lib/main.dart
 FLUTTER_BUILD_DIR=build
-SYMROOT=${SOURCE_ROOT}/../build\ios
-FLUTTER_FRAMEWORK_DIR=c:\my-dev\ide\flutter\bin\cache\artifacts\engine\ios
+SYMROOT=${SOURCE_ROOT}/../build/ios
+OTHER_LDFLAGS=$(inherited) -framework Flutter
+FLUTTER_FRAMEWORK_DIR=/home/robin/my-dev/flutter/bin/cache/artifacts/engine/ios
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
